@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form action="/user/register" method="POST">
+        <input type="text" name="username" placeholder="아이디" required>
+        <input type="password" name="password" placeholder="비밀번호" required>
+        <input type="password" name="confirmPassword" placeholder="비밀번호 확인" required>
+        <input type="text" name="nickname" placeholder="닉네임" required>
+        <select name="region">
+            <option value="서울">서울</option>
+            <!-- Add more regions here -->
+        </select>
+        <select name="passed_year">
+            <option value="2024">2024</option>
+            <!-- Add more years here -->
+        </select>
+        <input type="text" name="secret_code" placeholder="시크릿코드" required>
+        <button type="submit">회원가입</button>
+    </form>
+</body>
+</html>

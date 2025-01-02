@@ -1,19 +1,24 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-require('dotenv').config();
-
+const cors = require('cors');
+const dotenv = require('dotenv');
 const app = express();
+const db = require('./models/db');
+
+dotenv.config();
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-    res.send('Welcome to My Website!');
-});
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+
+app.use('/', authRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
-
