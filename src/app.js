@@ -1,22 +1,21 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const dotenv = require('dotenv');
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+require("dotenv").config();
+
 const app = express();
-const db = require('./models/db');
 
-dotenv.config();
+// 뷰 엔진 설정
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(cors());
+// 미들웨어 설정
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, "../public")));
 
-const userRoutes = require('./routes/userRoutes');
-const authRoutes = require('./routes/authRoutes');
-
-app.use('/', authRoutes);
-app.use('/user', userRoutes);
+// 라우트 설정
+const authRoutes = require("./routes/authRoutes");
+app.use(authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
